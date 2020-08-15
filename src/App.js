@@ -18,7 +18,12 @@ function App() {
 
   console.log(news)
 
+  if(!news.length){
+    return 'Loading'
+  }
+  
   return (
+    
     <div className="App">
        <NewsCards articles={news}/>
     </div>
