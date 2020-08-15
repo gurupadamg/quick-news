@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 
+import { fetchLatestNews } from './api'
+import NewsCards from './components/NewsCards/NewsCards';
+
 function App() {
+
+  const[news, setNews] = useState([])
+
+  useEffect(() => {
+    const fecthAPI = async () => {
+        setNews(await fetchLatestNews())
+    }
+    fecthAPI()
+   
+  }, [])
+
+  console.log(news)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <NewsCards articles={news}/>
     </div>
   );
 }
